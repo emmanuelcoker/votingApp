@@ -1,0 +1,113 @@
+.scrolltable {
+            overflow-x: scroll;
+            height: 100%;
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: column;
+            -webkit-flex-direction: column;
+        }
+        .scrolltable > .header {
+        }
+        .scrolltable > .body {
+           
+            width: -webkit-fit-content;
+            overflow-y: scroll;
+            flex: 1;
+            -webkit-flex: 1;
+        }
+
+        th, td {
+            min-width: 150px;
+        }
+
+        /* an outside constraint to react against */
+      
+
+      #constrainer1 {
+            margin-top:-400px;
+            margin-left: 50px;
+            width: 600px;
+            overflow-x: scroll;
+        }
+      #constrainer1 table {
+            overflow-y: scroll;
+
+
+        }
+      #constrainer1 tbody {
+            display:block;
+
+            height: 400px;
+        }
+      #constrainer1 thead {
+            display: table-row;
+        }
+
+
+h3{
+    margin-left: 8px;
+}
+
+        /* only styling below here */
+        #constrainer, #constrainer1 {
+            border: 1px solid lightgrey;
+        }
+
+
+
+
+
+
+
+        #constrainer2 {
+            margin-top:-400px;
+            margin-left: 50px;
+            width: 600px;
+            overflow-x: scroll;
+        }
+        #constrainer2 table {
+            overflow-y: scroll;
+
+
+        }
+        #constrainer2 tbody {
+            display:block;
+
+            height: 400px;
+        }
+        #constrainer2 thead {
+            display: table-row;
+        }
+
+
+h3{
+    margin-left: 8px;
+}
+
+        /* only styling below here */
+        #constrainer, #constrainer2 {
+            border: 1px solid lightgrey;
+        }
+        table {
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid gray;
+            text-align: center;
+
+        }
+        th {
+            background-color: lightgrey;
+            border-width: 1px;
+        }
+        td {
+            border-width: 1px;
+        }
+        tr:first-child td {
+            border-top-width: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #eee;
+        }
+
