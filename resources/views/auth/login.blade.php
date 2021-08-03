@@ -11,16 +11,16 @@
 
             <form action="{{route('login')}}" method="POST" class="sky-form">
                 {{csrf_field()}}
-                <header>   Student Verification <img src="img/logo.png"></header>
+                <header>   Student Verification <img src="img/ivote2.png" style="width: 90px; height:50px;"></header>
 
                 <fieldset>
                     <section>
                         <div class="row">
                             <label class="label col col-4">Your Email</label>
-                            <div class="col col-8">
+                            <div class="col col-8 form-group">
                                 <label class="input">
 
-                                    <input type="email" required="" name="email" >
+                                    <input type="email" class="form-control" required="" name="email" >
                                 </label>
                             </div>
                         </div>
@@ -29,10 +29,10 @@
                     <section>
                         <div class="row">
                             <label class="label col col-4">Password</label>
-                            <div class="col col-8">
+                            <div class="col col-8 form-group">
                                 <label class="input">
 
-                                    <input type="password" required="" name="password">
+                                    <input type="password" class="form-control" required="" name="password">
                                 </label>
 
                                 @if (Route::has('password.request'))

@@ -14,27 +14,6 @@
         <div class="card-header">
           <h3 class="card-title">All Seats</h3>
 
-          {{-- <div class="card-tools">
-            
-            <form action="{{route('searchUser')}}" method="POST">
-                {{csrf_field()}}
-                <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="search" list="users" name="search" class="form-control float-right" placeholder="Search">
-                    <datalist id="users">
-                      @foreach($users as $user)
-                      <option value="{{$user->regno}}">{{$user->regno}}</option>
-                      @endforeach
-                    </datalist>
-       
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
-      
-            </form>
-           
-          </div> --}}
-
         <div class="card-tools mr-2">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#staticBackdrop">
@@ -50,6 +29,7 @@
                 <thead>
                     <th>s/n</th>
                     <th>Seat</th>
+                    <th>Action</th>
                 </thead>
 
             <tbody>
@@ -58,9 +38,19 @@
                         <td></td>
                         <td>{{$seat->position}}</td>
                       
-                        <td>
-                           Actions 
-                        </td>
+                        <td class="d-flex">
+                          <div class="pl-1">
+                              {!!Form::open(['action'=>['AdminController@destroySeat',$seat->id], 'method'=>'POST','enctype' => 'multipart/form-data' , 'class'=> ''])!!}
+              
+                               {{Form::hidden('_method','DELETE')}}
+                            
+                                  <button type="submit" class="btn btn-danger btn-sm mt-0">
+                                      <i class="far fa-trash-alt"></i>
+                                  </button>
+                 
+                              {!!Form::close()!!} 
+                          </div>
+                      </td>
                     </tr>
                 @endforeach
                 <div class="card-footer clearfix">

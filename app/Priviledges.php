@@ -12,7 +12,7 @@ class Priviledges extends Model
     ];
 
     public function seat(){
-        return $this->belongsTo('App\Seat');
+        return $this->hasMany('App\Seat');
     }
 
 }

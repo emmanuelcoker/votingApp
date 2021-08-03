@@ -4,38 +4,65 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Seat;
+use App\Priviledges;
+use App\Department;
+use App\Faculty;
 use App\Candidate;
+use App\VoteTime;
 
 class ElectionController extends Controller
 {
     public function showVotingPage(){
-        $presidentials = empty(Candidate::where('seat','president'))?[]:Candidate::where('seat','president')->get();
-        $vices = empty(Candidate::where('seat','vice-chair'))?[]:Candidate::where('seat','vice-chair')->get();
-        $finances = empty(Candidate::where('seat','finance'))?[]:Candidate::where('seat','finance')->get();
-        $secs = empty(Candidate::where('seat','sec-general'))?[]:Candidate::where('seat','sec-general')->get();
-        return view('election.vote')
-            ->withPresidentials($presidentials)
-            ->withVices($vices)
-            ->withFinances($finances)
-            ->withSecs($secs);
+        $allSeats = Seat::all();
+        foreach ($allSeats as $post) {
+            $seats[] = $post->candidateSeat; 
+        }
+            return view('election.vote')
+                ->withSeats($seats);
+
+
     }
 
     public function showResults(){
-        $presidentials = empty(Candidate::where('seat','president'))?[]:Candidate::where('seat','president')->get();
-        $vices = empty(Candidate::where('seat','vice-chair'))?[]:Candidate::where('seat','vice-chair')->get();
-        $finances = empty(Candidate::where('seat','finance'))?[]:Candidate::where('seat','finance')->get();
-        $secs = empty(Candidate::where('seat','sec-general'))?[]:Candidate::where('seat','sec-general')->get();
-        return view('election.results')
-            ->withPresidentials($presidentials)
-            ->withVices($vices)
-            ->withFinances($finances)
-            ->withSecs($secs);
-        return view('election.results')->withCandidates($candidates);
+
+        $seats = Seat::all();
+        //get all candidates for each seatss
+        foreach ($seats as $post) {
+            $candidates[] = $post->candidateSeat; 
+        }
+            return view('election.results')
+                ->withSeats($seats)
+                ->withCandidates($candidates);
     }
 
     public function vote(Request $vote){
-        User::vote($vote->president,$vote->vice,$vote->secretary,$vote->finance);
-        User::where('id',$vote->id)->delete();
-        return redirect('logout');
+
+        $user = User::find(auth()->user()->id);
+        $votetime = VoteTime::find(1);
+        $today = date("Y-m-d");
+        // return $today;
+        //check if the voting session has ended or not
+        if($today >= $votetime->finish_time){
+            return redirect('/')->with('alert','Voting Session Has Ended! Check Results');
+        }
+        if($user->vote_status == 'not voted' || $user->admission_status == 'In session'){
+            $selectedCandidates = $vote->input('candidateIds');
+
+            //find each user and update their votes
+            foreach ($selectedCandidates as $person) {
+                $person = (int)$person;
+                $candidate = Candidate::find($person);
+                $candidate->votes++;
+                $candidate->save();
+            }
+            $user->vote_status = 'voted';
+            $user->save();
+            
+            return redirect('logout');
+        }else{
+            return redirect('/')->with('alert','You are Ineligible to vote!');
+        }
+    
     }
 }

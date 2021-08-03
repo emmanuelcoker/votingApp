@@ -36,11 +36,11 @@ class User extends Authenticatable
     }
 
     public function user_faculty(){
-        return $this->belongsTo('App\Faculty');
+        return $this->belongsTo('App\Faculty','faculty');
     }
 
     public function department(){
-        return $this->belongsTo('App\Department');
+        return $this->belongsTo('App\Department','dept');
     }
 
     public function registerVoter($name,$email,$password,$regno,$dept,$faculty){
@@ -55,6 +55,8 @@ class User extends Authenticatable
         $newVoter->admission_status = "In Session";
         $newVoter->save();
     }
+
+
     public static function addCandidate($studentId,$seat,$priviledge,$profile_img){
         $user = User::find($studentId);
         $newCandidate = new Candidate;
@@ -68,7 +70,7 @@ class User extends Authenticatable
         $newCandidate->save();
     }
 
-     public static function vote($president,$vice,$secretary,$finance){
-         Candidate::vote($president,$vice,$secretary,$finance);
-     }
+    //  public static function vote($president,$vice,$secretary,$finance){
+    //      Candidate::vote($president,$vice,$secretary,$finance);
+    //  }
 }

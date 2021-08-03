@@ -56,7 +56,7 @@
             <thead>
               <th>Reg no.</th>
               <th>Name</th>
-              <th>Seat</th>
+              <th>Aspired Seat</th>
               <th>Votes</th>
               <th>Priviledge</th>
               <th>Action</th>
@@ -66,7 +66,7 @@
                     <tr>
                         <td>{{$candidate->regno}}</td>
                         <td>{{$candidate->name}}</td>
-                        <td>{{$candidate->seat}}</td>
+                        <td>{{$candidate->seats->position}}</td>
                         <td>{{$candidate->votes}}</td>
                           @if($candidate->priviledge == 0)
                             <td>None</td>
@@ -75,7 +75,29 @@
                         @endif
                         
                         <td class="d-flex">
-                            action
+                      <div class="pr-1">
+                                <a href="/candidate/{{$candidate->id}}" class="text-white btn btn-sm btn-success">
+                                    <i class="far fa-eye"></i>
+                                </a>
+                            </div>
+
+                            <div class="pr-1">
+                                <a href="/candidate/{{$candidate->id}}/edit" type="button" class="text-white btn btn-sm btn-primary">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                            </div>
+                         
+                            <div class="pl-1">
+                                {!!Form::open(['action'=>['AdminController@destroyCandidate',$candidate->id], 'method'=>'POST','enctype' => 'multipart/form-data' , 'class'=> ''])!!}
+                
+                                 {{Form::hidden('_method','DELETE')}}
+                              
+                                    <button type="submit" class="btn btn-danger btn-sm mt-0">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                   
+                                {!!Form::close()!!} 
+                            </div>
                         </td>
                     </tr>
                 @endforeach

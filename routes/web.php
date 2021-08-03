@@ -64,6 +64,15 @@ Route::get('/admin/login',[
     'as'=>'admin.login'
 ]);
 
+Route::get('/login',[
+    'uses'=>'Auth\LoginController@show',
+    'as'=>'loginPage'
+]);
+Route::post('/login',[
+    'uses'=>'Auth\LoginController@login',
+    'as'=>'login'
+]);
+
 Route::get('/admin/candidates',[
     'uses'=>'AdminController@getCandidates',
     'as'=>'admin.candidates'
@@ -115,16 +124,75 @@ Route::get('/admin/seats',[
 
 
 //edit
-Route::patch('/users/{id}/',[
+Route::get('/users/{id}/edit',[
+    'uses'=>'AdminController@editStudent',
+    'as'=>'editStudent'
+])->middleware(['admin','auth']);
+
+Route::post('/users/{id}/',[
     'uses'=>'AdminController@updateStudent',
     'as'=>'updateStudent'
 ])->middleware(['admin','auth']);
 
+Route::get('/candidate/{id}/edit',[
+    'uses'=>'AdminController@editCandidate',
+    'as'=>'editCandidate'
+])->middleware(['admin','auth']);
+
+Route::get('/candidate/{id}/',[
+    'uses'=>'AdminController@showCandidate',
+    'as'=>'showCandidate'
+])->middleware(['admin','auth']);
+
+Route::post('/candidate/{id}/',[
+    'uses'=>'AdminController@updateCandidate',
+    'as'=>'updateCandidate'
+])->middleware(['admin','auth']);
 
 
 //delete
 Route::delete('/destroyStudent/{id}',[
     'uses'=>'AdminController@destroyStudent',
     'as'=>'destroyStudent'
+])->middleware(['admin','auth']);
+
+Route::delete('/destroyCandidate/{id}',[
+    'uses'=>'AdminController@destroyCandidate',
+    'as'=>'destroyCandidate'
+])->middleware(['admin','auth']);
+
+
+Route::delete('/destroyFaculty/{id}',[
+    'uses'=>'AdminController@destroyFaculty',
+    'as'=>'destroyFaculty'
+])->middleware(['admin','auth']);
+
+Route::delete('/destroyDepartment/{id}',[
+    'uses'=>'AdminController@destroyDepartment',
+    'as'=>'destroyDepartment'
+])->middleware(['admin','auth']);
+
+Route::delete('/destroySeat/{id}',[
+    'uses'=>'AdminController@destroySeat',
+    'as'=>'destroySeat'
+])->middleware(['admin','auth']);
+
+
+//Vote time Route
+
+// Route::get('/admin/votetime',[
+//     'uses'=>'AdminController@voteTime',
+//     'as'=>'voteTime'
+// ])->middleware(['admin','auth']);
+
+Route::get('/votetime/{id}/edit',[
+    'uses'=>'AdminController@editVoteTime',
+    'as'=>'editVoteTime'
+])->middleware(['admin','auth']);
+
+
+Route::post('/voteTime/{id}/',[
+    'uses'=>'AdminController@updateVoteTime',
+    'as'=>'updateVoteTime'
 ])->middleware(['admin','auth']);
 

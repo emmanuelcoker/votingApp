@@ -44,7 +44,7 @@
 
         </div>
         <!-- /.card-header -->
-        <div class="card-body table-responsive p-0" style="height: 485px;">
+        <div class="card-body table-responsive p-0" style="height: 100vh;">
           <table class="table table-hover fixed text-nowrap">
     
                 <thead>
@@ -63,30 +63,33 @@
                         <td>{{$user->regno}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->department ?? "None"}}</td>
-                        <td>{{$user->user_faculty ?? "None"}}</td>
+                        <td>{{$user->department->name ?? "None"}}</td>
+                        <td>{{$user->user_faculty->name ?? "None"}}</td>
                         <td>{{$user->admission_status}}</td>
                         <td class="d-flex">
                             <form action="{{route('candidate.add')}}" method="POST">
                                 @if(empty($user->candidate)) {{csrf_field()}}
                                 <input type="hidden" name="id" value="{{$user->id}}">
-                                <input type="hidden" name="priviledge" value="0">
+                                <input type="hidden" name="priviledge" value="1">
                                 <input type="hidden" name="profile_img" value="noImage.jpg">
-                                <select name="seat">
+                                <select name="seat" class="form-control" style="width: 100%;">
                                     @foreach ($seats as $seat)
-                                    <option value="{{$seat->position}}">{{$seat->position}}</option>
+                                    <option value="{{$seat->id}}">{{$seat->position}}</option>
                                     @endforeach
                                 </select>
                                 <input type="submit"value="Add Student">
                                 @else
-                                <input type="text"value="{{$user->candidate->seat}}" disabled>
+                                <?php
+                                    $seatName = \App\Seat::find($user->candidate->seat);
+                                ?>
+                                <input type="text" class="form-control w-100" value="{{$seatName->position}}" disabled>
                                 @endif
                             </form>
                         </td>
                         <td class="d-flex">
 
                             <div class="pr-1">
-                                <a type="button" class="text-white btn btn-sm btn-primary" data-toggle="modal" data-target="#staticBackdrop2">
+                                <a href="/users/{{$user->id}}/edit" class="text-white btn btn-sm btn-primary">
                                     <i class="far fa-edit"></i>
                                 </a>
                             </div>
@@ -103,26 +106,7 @@
                                 {!!Form::close()!!} 
                             </div>
                         </td>
-                        <!-- Modal -->
-<div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Edit Student</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        @include('inc.editUser')
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+              
   <!--end of modal-->
                     </tr>
 

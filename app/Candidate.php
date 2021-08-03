@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Candidate extends Model
 {
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id');
     }
+
+    public function seats(){
+        return $this->belongsTo('App\Seat','seat');
+    }
+
+
     public function add($name,$seat,$regno,$user_id){
         $this->name =$name;
         $this->seat = $seat;

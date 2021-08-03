@@ -48,17 +48,24 @@
           <table class="table table-hover fixed text-nowrap">
     
                 <thead>
-                    <th>s/n</th>
                     <th>Faculty</th>
+                    <th></th>
                 </thead>
 
             <tbody>
                 @foreach($faculties as $faculty)    
                     <tr>
-                        <td></td>
                         <td>{{$faculty->name}}</td>          
                         <td>
-                           Actions 
+                            {!!Form::open(['action'=>['AdminController@destroyFaculty',$faculty->id], 'method'=>'POST','enctype' => 'multipart/form-data' , 'class'=> ''])!!}
+                
+                                 {{Form::hidden('_method','DELETE')}}
+                              
+                                    <button type="submit" class="btn btn-danger btn-sm mt-0">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                   
+                                {!!Form::close()!!} 
                         </td>
                     </tr>
                 @endforeach

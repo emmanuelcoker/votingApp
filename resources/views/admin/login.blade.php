@@ -12,7 +12,7 @@
         
             <form action="{{route('login')}}" method="POST" class="sky-form">
                 {{ csrf_field() }}
-                <header>Administrator login {{Html::image('img/logo.png','',['padding'=>'200px'])}}</header>
+                <header>Administrator login {{Html::image('img/ivote2.png','',['padding'=>'200px'])}}</header>
                 
                 <fieldset>                  
                     <section>

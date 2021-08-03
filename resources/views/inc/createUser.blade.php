@@ -16,7 +16,7 @@
                   <select name="dept" id="dept" class="form-control" style="max-width: 100%; width:800px;">
                     <option value="0">None</option>
                       @foreach ($departments as $department)
-                          <option class="p-2 bg-light"value="{{$department->name}}">{{$department->name}}</option>
+                          <option class="p-2 bg-light"value="{{$department->id}}">{{$department->name}}</option>
                       @endforeach
                   </select>
                 
@@ -27,7 +27,7 @@
                   <select name="faculty" id="" class="form-control" style="max-width: 100%; width:800px;">
                     <option value="0">None</option>
                       @foreach ($faculties as $faculty)
-                          <option class="p-2 bg-light"value="{{$faculty->name}}">{{$faculty->name}}</option>
+                          <option class="p-2 bg-light"value="{{$faculty->id}}">{{$faculty->name}}</option>
                       @endforeach
                   </select>
                 

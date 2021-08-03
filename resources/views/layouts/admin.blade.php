@@ -52,7 +52,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/admin" class="brand-link">
-      <img src="{{ asset('img/comroc.jpg')}}" alt="Comroc Logo" class="brand-image img-circle elevation-3"
+      <img src="{{ asset('img/ivote2.png')}}" alt="Ivote Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">Ivote</span>
     </a>
@@ -77,7 +77,7 @@
           
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-box-open"></i>
+              <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Students 
                 <i class="right fas fa-angle-left"></i>
@@ -109,7 +109,7 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-box-open"></i>
+              <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Candidates
                 <i class="right fas fa-angle-left"></i>
@@ -134,12 +134,33 @@
           </li>
            
 
-          
-          {{-- Log out --}}
-        <li class="nav-item has-treeview">
-          <a href="{{route('logout')}}" href="#about">Logout</a>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user-circle"></i>
+              <p>
+                Start Date and Time
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            
+              <li class="nav-item">
+                <a href="/votetime/1/edit" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Set Date and Time</p>
+                </a>
+              </li>
+        
+            </ul>
+          </li>
+
+              {{-- Log out --}}
+            <li class="nav-item has-treeview">
+             <a href="{{route('logout')}}" class="nav-link" href="#about"><i class="nav-icon fas fa-sign-out-alt"></i>Logout</a>
          
-        </li>
+            </li>
+     
+           
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -10,7 +10,7 @@
         <div class="body body-s">
 
             <form action="" class="sky-form">
-                <header>   Student Verification <img src="img/logo.png"></header>
+                <header>   Student Verification <img src="img/ivote2.png"></header>
 
                 <fieldset>
                     <section>

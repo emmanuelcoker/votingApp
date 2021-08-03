@@ -13,48 +13,24 @@
 
             <form action="{{route('vote')}}"  method="POST" class="sky-form">
                 {{csrf_field()}}
-                <header>JKUAT's president {{Html::image('img/logo.png','',['padding'=>'200px'])}}</header>
+
+                @for($i = 0; $i < count($seats); $i++)
+                     <header>
+                     <?php
+                     $seatName = \App\Seat::find($seats[$i][0]->seat);
+                     echo $seatName->position;
+                     ?>
+                     </header>
                 <input type="hidden" name="id" value="{{Auth::user()->id}}">
                 <fieldset>
-                 <select name="president" class="select">
-
-                        @foreach($presidentials as $presidential)
-                            <option value="{{$presidential->id}}">{{$presidential->name}}</option>
-                        @endforeach
-                                      </div>
+                 <select name="candidateIds[]" class="select">
+                    @foreach($seats[$i] as $candidate)
+                            <option value="{{$candidate->id}}">{{$candidate->name}}</option>
+                        @endforeach 
                                </select>
                 </fieldset>
-
-                <header>Vice chairpesron</header>
-                 <fieldset>
-                 <select class="select" name="vice">
-                        @foreach($vices as $vice)
-                            <option value="{{$vice->id}}">{{$vice->name}}</option>
-                        @endforeach
-                                      </div>
-                               </select>
-                </fieldset>
-
-            <header>Secretary General</header>
-             <fieldset>
-                 <select class="select" name="secretary">
-                         @foreach($secs as $sec)
-                            <option value="{{$sec->id}}">{{$sec->name}}</option>
-                        @endforeach
-                                      </div>
-                               </select>
-                </fieldset>
-
-            <header>Finance secretary</header>
-            <fieldset>
-                 <select class="select" name="finance">
-                         @foreach($finances as $finance)
-                            <option value="{{$finance->id}}">{{$finance->name}}</option>
-                        @endforeach
-                                      </div>
-                               </select>
-                </fieldset>
-
+                     
+                @endfor
 
                 <footer>
                     <button type="submit" class="button">Vote</button>

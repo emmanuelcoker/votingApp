@@ -9,13 +9,14 @@ class Seat extends Model
     protected $table = 'seats';
     protected $fillable = [
         'position',
+        'priviledge',
     ];
 
-    public function candidate(){
-        return $this->hasOne('App\Candidate');
+    public function candidateSeat(){
+        return $this->hasMany('App\Candidate','seat');
     }
 
     public function priviledge(){
-        return $this->hasOne('App\Priviledge');
+        return $this->hasOne('App\Priviledge','priviledge');
     }
 }
